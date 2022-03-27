@@ -4,7 +4,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
     <title>Guess the Pokemon</title>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <section id="top">
+        <button id="play">Play</button>
+      </section>
+      <section id="game-play">
+        <section id="left-side">
+          <img
+            id="guess-image"
+            src="./assets/images/pokemon.jpeg"
+            alt="pokemon image"
+            width="250px"
+            height="250px"
+          />
+          <p>guess the pokemon</p>
+          <p id="pokemon-name"></p>
+          <p id="guessed-words">Guessed Words:</p>
+        </section>
+        <section id="right-side">
+          <p>countdown</p>
+        </section>
+      </section>
+    </main>
+    <script src="./javascript/app.js"></script>
+  </body>
 </html>
