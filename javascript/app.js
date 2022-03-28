@@ -2,6 +2,15 @@ let image = document.getElementById("guess-image");
 let button = document.getElementById("play");
 let word = document.getElementById("pokemon-name");
 let guessed = document.getElementById("guessed-words");
+let result = document.getElementById("result");
+let gameTime = 20;
+let timerInterval;
+let countdown = document.getElementById("countdown");
+let win = localStorage.getItem("win");
+let loss = localStorage.getItem("loss");
+let playerWin = document.getElementById("player-win");
+let playerLoss = document.getElementById("player-loss");
+let reset = document.getElementById("reset");
 
 let wordChoices = [
   "bulbasaur",
@@ -24,6 +33,7 @@ function playGame() {
   checkGuess(selectedWord, hiddenWord);
 
   //check if won in the said interval
+  gameTime = 20;
 }
 
 //fucntion to generate random word from the provided words
@@ -53,13 +63,13 @@ function createBlanks(guessWord) {
 function checkGuess(userValue, blanks) {
   let guesses = [];
   let guessedLetters = "";
+  let answer = "";
 
   // event function on key up anywhere inside the document.
   document.onkeyup = function (event) {
     // every event is a key pressed
     let userGuess = event.key;
     let userValueArr = userValue.split("");
-    let answer = "";
 
     // const matches = userValue.matchAll(userGuess)
     // for (let match of matches) {
@@ -72,12 +82,21 @@ function checkGuess(userValue, blanks) {
         blanks[i] = userGuess;
       }
     }
+
     answer = blanks.join("");
     word.innerHTML = answer;
 
     guesses.push(userGuess);
     guessedLetters = guesses.join(",");
     guessed.innerText = guessedLetters;
+
+    if (answer === userValue) {
+      clearInterval(timerInterval);
+      win++;
+      countdown.innerText = "Congratulations you win!!";
+      playerWin.textContent = win;
+      localStorage.setItem("win", win);
+    }
 
     // if (wordIndex !== 1 && userValue.includes(userGuess)) {
     //   blanks.splice(wordIndex, 1, userGuess);
@@ -89,25 +108,24 @@ function checkGuess(userValue, blanks) {
     // guessedWords = guesses.join(",");
     // guessed.innerHTML = guessedWords;
   };
-  console.log(guessedLetters);
 }
 
 // function to set interval of the game
 
-let gameTime = 20;
-let countdown = document.getElementById("right-side");
-
 function setTime() {
   // Sets interval in variable
-  let timerInterval = setInterval(function () {
+  timerInterval = setInterval(function () {
     gameTime--;
     countdown.textContent = gameTime + " seconds remaining.";
 
     if (gameTime === 0) {
       // Stops execution of action at set interval
+
       clearInterval(timerInterval);
-      alert("Times up!!!");
-      document.reload();
+      loss++;
+      countdown.innerText = "Sorry Times up!!";
+      playerLoss.innerText = loss;
+      localStorage.setItem("loss", loss);
     }
   }, 1000);
 }
@@ -116,4 +134,19 @@ function setTime() {
 button.addEventListener("click", function () {
   playGame();
   setTime();
+});
+
+//reset local storage memory
+function resetValues() {
+  localStorage.clear;
+  playerLoss.innerText = 0;
+  playerWin.textContent = 0;
+  countdown.innerHTML = "Click Play to Begin";
+  image.src = "./assets/images/pokemon.jpeg";
+  word.innerHTML = "";
+  clearInterval(timerInterval);
+}
+
+reset.addEventListener("click", function () {
+  resetValues();
 });
