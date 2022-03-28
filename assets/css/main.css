@@ -14,8 +14,8 @@ main {
   margin-top: 50px;
 }
 
-button,
-button::after {
+#play,
+#play::after {
   width: 380px;
   height: 86px;
   font-size: 36px;
@@ -30,7 +30,7 @@ button::after {
   position: relative;
 }
 
-button::after {
+#play::after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
   --slice-2: inset(50% -6px 30% 0);
@@ -56,7 +56,7 @@ button::after {
   clip-path: var(--slice-0);
 }
 
-button:hover::after {
+#play:hover::after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
@@ -113,3 +113,5 @@ button:hover::after {
   justify-content: space-around;
   margin-top: 50px;
 }
+
+/* style to reset button */
