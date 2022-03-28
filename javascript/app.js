@@ -23,7 +23,7 @@ function playGame() {
   //start guessing the words
   checkGuess(selectedWord, hiddenWord);
 
-  // fill blanks
+  //check if won in the said interval
 }
 
 //fucntion to generate random word from the provided words
@@ -89,9 +89,31 @@ function checkGuess(userValue, blanks) {
     // guessedWords = guesses.join(",");
     // guessed.innerHTML = guessedWords;
   };
+  console.log(guessedLetters);
+}
+
+// function to set interval of the game
+
+let gameTime = 20;
+let countdown = document.getElementById("right-side");
+
+function setTime() {
+  // Sets interval in variable
+  let timerInterval = setInterval(function () {
+    gameTime--;
+    countdown.textContent = gameTime + " seconds remaining.";
+
+    if (gameTime === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      alert("Times up!!!");
+      document.reload();
+    }
+  }, 1000);
 }
 
 // playgame button to start the game//
 button.addEventListener("click", function () {
   playGame();
+  setTime();
 });
