@@ -99,7 +99,7 @@ function checkGuess(userValue, blanks) {
       clearInterval(timerInterval);
       win++;
       countdown.innerText = "Congratulations you win!!";
-      playerWin.textContent = win;
+      playerWin.innerText = win;
       localStorage.setItem("win", win);
     }
 
@@ -151,7 +151,7 @@ function resetValues() {
   localStorage.setItem("win", 0);
   localStorage.setItem("loss", 0);
   playerLoss.innerText = 0;
-  playerWin.textContent = 0;
+  playerWin.innerText = 0;
   countdown.innerHTML = "Click Play to Begin";
   image.src = "./assets/images/pokemon.jpeg";
   word.innerHTML = "";
