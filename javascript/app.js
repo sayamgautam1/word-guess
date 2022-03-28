@@ -19,6 +19,11 @@ let wordChoices = [
   "eevee",
   "pikachu",
   "squirtle",
+  "dragonite",
+  "tyranitar",
+  "metagross",
+  "arcanine",
+  "mewtwo",
 ];
 // function main work staion //
 
@@ -133,17 +138,24 @@ function setTime() {
 // playgame button to start the game//
 button.addEventListener("click", function () {
   playGame();
-  setTime();
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    setTime();
+  } else {
+    setTime();
+  }
 });
 
 //reset local storage memory
 function resetValues() {
-  localStorage.clear;
+  localStorage.setItem("win", 0);
+  localStorage.setItem("loss", 0);
   playerLoss.innerText = 0;
   playerWin.textContent = 0;
   countdown.innerHTML = "Click Play to Begin";
   image.src = "./assets/images/pokemon.jpeg";
   word.innerHTML = "";
+  guessed.innerHTML = "";
   clearInterval(timerInterval);
 }
 
