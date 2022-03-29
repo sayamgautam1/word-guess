@@ -28,6 +28,8 @@ let wordChoices = [
 // function main work staion //
 
 function playGame() {
+  win = localStorage.getItem("win");
+  loss = localStorage.getItem("loss");
   // get a random word from the array
   let selectedWord = getWord();
 
@@ -150,6 +152,9 @@ button.addEventListener("click", function () {
 function resetValues() {
   localStorage.setItem("win", 0);
   localStorage.setItem("loss", 0);
+  win = 0;
+  loss = 0;
+
   playerLoss.innerText = 0;
   playerWin.innerText = 0;
   countdown.innerHTML = "Click Play to Begin";
